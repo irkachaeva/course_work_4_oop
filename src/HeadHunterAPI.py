@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 
 class ApiABS(ABC):
     @abstractmethod
-    def load_vacancies(self,*args):
+    def load_vacancies(self, *args):
         pass
 
 
@@ -27,7 +27,7 @@ class HeadHunterAPI(ApiABS):
         return self.vacancies
 
 
-api = HeadHunterAPI()
-keyword = ("Оператор склада")
-vacancies = api.load_vacancies(keyword)
-print(vacancies)
+# api = HeadHunterAPI()
+# keyword = ("Оператор склада")
+# vacancies = api.load_vacancies(keyword)
+# print(vacancies)

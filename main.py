@@ -1,7 +1,22 @@
 from src.HeadHunterAPI import HeadHunterAPI
+from src.Vacancy import Vacancy
+from src.JSONSaver import JSONSaver
 
 
 vacancy = input('Введите название вакансии:')
+hh_api = HeadHunterAPI()
+hh_vacancies = hh_api.load_vacancies(vacancy)
+
+json_saver = JSONSaver()
+vacancies_list = json_saver.cast_to_object_list(hh_vacancies)
+json_saver.add_vacancy()
+
+# test =[]
+# for i in vacancies_list:
+#     l = i.__str__()
+#     test.append(l)
+# print(test)
+
 
 
 
