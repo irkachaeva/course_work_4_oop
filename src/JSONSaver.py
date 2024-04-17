@@ -24,6 +24,8 @@ class JSONSaver:
         with open("../data/vacancy.json", "r", encoding="utf8") as f:
             list_vacancies = json.load(f)
 
+            """приводим к классу вакансии и забисываем в очищенный файл для дальнейшей работы"""
+
             for hh_vacancy in list_vacancies:
                 name = hh_vacancy['name']
                 salary = hh_vacancy['salary']
