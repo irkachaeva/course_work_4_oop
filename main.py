@@ -8,8 +8,8 @@ hh_api = HeadHunterAPI()
 hh_vacancies = hh_api.load_vacancies(vacancy)
 
 json_saver = JSONSaver()
-vacancies_list = json_saver.cast_to_object_list(hh_vacancies)
-json_saver.add_vacancy()
+vacancies_list = json_saver.add_vacancy(hh_vacancies)
+
 
 # test =[]
 # for i in vacancies_list:
