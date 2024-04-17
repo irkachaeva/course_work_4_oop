@@ -9,8 +9,5 @@ class Vacancy:
         self.snippet = snippet
         self.alternate_url = alternate_url
 
-    def __repr__(self):
-        return [self.name, self.salary, self.area, self.employer, self.experience, self.snippet, self.alternate_url, self.type_v]
-
     def class_to_dict(obj):
         return obj.__dict__

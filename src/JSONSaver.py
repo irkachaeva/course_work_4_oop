@@ -8,9 +8,7 @@ from abc import ABC, abstractmethod
 class JSONSaver:
 
     def __init__(self):
-        self.hh_vacancies =[]
         self.vacancy = []
-
 
     @staticmethod
     def add_vacancy(vacancy):
@@ -39,7 +37,6 @@ class JSONSaver:
                 vacancies_for_use.append(vacancies.class_to_dict())
             with open("../data/vacancies_for_use.json", "w", encoding="utf8") as f:
                 f.write(json.dumps(vacancies_for_use, ensure_ascii=False))
-
 
     def delete_vacancy(self, vacancy):
          pass
