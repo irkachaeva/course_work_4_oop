@@ -55,7 +55,7 @@ class JSONSaver:
                     salary_currency = "Не заполнено"
                 else:
                     salary_currency = hh_vacancy['salary']['currency']
-            salary_gross = "ЗП к начислению"
+                salary_gross = "ЗП к начислению"
             area = hh_vacancy['area']["name"]
             employer = hh_vacancy['employer']['name']
             experience = hh_vacancy["experience"]['name']
