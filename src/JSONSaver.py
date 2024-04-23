@@ -79,10 +79,10 @@ class JSONSaver:
                 file.write(list)
 
 
-test = HeadHunterAPI()
-list = test.load_vacancies("Водитель")
-J = JSONSaver()
-J.add_vacancy(list)
+# test = HeadHunterAPI()
+# list = test.load_vacancies("КУрьер")
+# J = JSONSaver()
+# J.add_vacancy(list)
 
 
 

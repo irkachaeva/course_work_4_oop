@@ -18,7 +18,7 @@ def sorting(vacancies_list, top_n, salary_from, salary_to, city):
     for item in vacancies_list:
         if city != "":
             if item['area'] == city:
-                if item["salary_from"] == "" and item["salary_to"] == "":
+                if item["salary_from"] == "Не заполнено" and item["salary_to"] == "Не заполнено":
                     filtred_vacancies.append(item)
 
                 if item["salary_from"] >= salary_from and item["salary_to"] >= salary_to:
