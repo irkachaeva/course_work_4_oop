@@ -1,6 +1,7 @@
 import requests
 from abc import ABC, abstractmethod
-
+import os.path
+import json
 
 class ApiABS(ABC):
     @abstractmethod
@@ -24,6 +25,7 @@ class HeadHunterAPI(ApiABS):
             vacancies = data.get('items', [])
             self.vacancies.extend(vacancies)
             self.params['page'] += 1
+
         return self.vacancies
 
 

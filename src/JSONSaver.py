@@ -1,9 +1,6 @@
 import json
-import os
-from src.HeadHunterAPI import HeadHunterAPI
+import os.path
 from src.Vacancy import Vacancy
-from json import JSONEncoder
-from abc import ABC, abstractmethod
 
 
 class JSONSaver:
@@ -11,78 +8,77 @@ class JSONSaver:
     def __init__(self):
         self.vacancy = []
 
-
     @staticmethod
     def add_vacancy(data):
-        vacancies_for_use = []
+        global salary_from, salary_to
         tax = 0.87
-        """Метод для добавления вакансий в файл"""
+        vacancies_for_use = []
 
-        with open("../data/vacancy.json", "w", encoding="utf8") as f: #сохранили вакансии в исходную выгрузку
-            vacancy_json = json.dumps(data, ensure_ascii=False)
-            f.write(vacancy_json)
-
-        with (open("../data/vacancy.json", "r", encoding="utf8") as f): #взяли загруженные вакансии для дальнейшей работы
-            list_vacancies = json.load(f)
-
-            """приводим к классу вакансии и забисываем в очищенный файл для дальнейшей работы"""
-
-        for hh_vacancy in list_vacancies:
-            name = hh_vacancy['name']
-
-            if hh_vacancy['salary'] is None:
+        for item in data:
+            name = item['name']
+            if item['salary'] is None:
                 salary_from = "Не заполнено"
                 salary_to = "Не заполнено"
                 salary_currency = "Не заполнено"
-                salary_gross = "Не заполнено"
-            else:
-                if hh_vacancy['salary']['from'] is None:
-                    salary_from = "Не заполнено"
-                else:
-                    if hh_vacancy['salary']['gross'] is False:
-                        salary_from = int(hh_vacancy['salary']['from']/tax)
+            try:
+                if item['salary']['gross'] is False:
+                    if item['salary']['from'] is not None:
+                        salary_from = int(item['salary']['from'] / tax)
                     else:
-                        salary_from = int(hh_vacancy['salary']['from'])
+                        salary_from = int(item['salary']['from'])
 
-                if hh_vacancy['salary']['to'] is None:
-                    salary_to = "Не заполнено"
-                else:
-                    if hh_vacancy['salary']['gross'] is False:
-                        salary_to = int(hh_vacancy['salary']['to']/tax)
+                    if item['salary']['to'] is not None:
+                        salary_to = int(item['salary']['to'] / tax)
                     else:
-                        salary_to = int(hh_vacancy['salary']['to'])
-                if hh_vacancy['salary']['currency'] is None:
-                    salary_currency = "Не заполнено"
-                else:
-                    salary_currency = hh_vacancy['salary']['currency']
-                salary_gross = "ЗП к начислению"
-            area = hh_vacancy['area']["name"]
-            employer = hh_vacancy['employer']['name']
-            experience = hh_vacancy["experience"]['name']
-            snippet = hh_vacancy['snippet']["requirement"]
-            alternate_url = hh_vacancy['alternate_url']
-            type_v = hh_vacancy['type']["name"]
+                        salary_to = int(item['salary']['to'])
+
+                    if item['salary']['currency'] is None:
+                        salary_currency = "Не заполнено"
+                    else:
+                        salary_currency = item['salary']['currency']
+                    if item['snippet']["requirement"] is None:
+                        snippet = "Не заполнено"
+                    else:
+                        snippet = item['snippet']["requirement"]
+            except:
+                TypeError()
+
+            salary_gross = "ЗП к начислению"
+            area = item['area']["name"]
+            employer = item['employer']['name']
+            experience = item["experience"]['name']
+            alternate_url = item['alternate_url']
+            type_v = item['type']["name"]
+
             vacancies = Vacancy(name, salary_from, salary_to, salary_currency, salary_gross, area, employer, experience,
                                 snippet, alternate_url, type_v)
             vacancies_for_use.append(vacancies.class_to_dict())
 
-        with open("../data/vacancies_for_use.json", "w", encoding="utf8") as f:
+        vacancies_for_use_path = os.path.join(os.getcwd(), 'data', 'vacancies_for_use.json')
+        with open(vacancies_for_use_path, "w", encoding="utf8") as f:
             f.write(json.dumps(vacancies_for_use, ensure_ascii=False))
 
     def delete_vacancy(self):
-            """Метод удаления данных из файла"""
-            list_vacancies_del = []
-            list = json.dumps(list_vacancies_del, ensure_ascii=False)
-            with open("../data/vacancies_for_use.json", "w", encoding="utf8") as f:
-                f.write(list)
-            with open("../data/vacancy.json", "r", encoding="utf8") as file:
-                file.write(list)
+
+        """Метод удаления данных из файла"""
+
+        vacancies_for_use_path = os.path.join(os.path.dirname(os.getcwd()), 'data', 'vacancies_for_use.json')
+        vacancies_path = os.path.join(os.path.dirname(os.getcwd()), 'data', 'vacancy.json')
+        list_vacancies_del = []
+        list = json.dumps(list_vacancies_del, ensure_ascii=False)
+        with open(vacancies_for_use_path, "w", encoding="utf8") as f:
+            f.write(list)
+        with open(vacancies_path, "r", encoding="utf8") as file:
+            file.write(list)
 
 
 # test = HeadHunterAPI()
-# list = test.load_vacancies("КУрьер")
+# list = write_vacancies(test.load_vacancies("Водитель"))
+#
+# vacancies_path = os.path.join(os.path.dirname(os.getcwd()), 'data', 'vacancy.json')
+# with (open(vacancies_path, "r", encoding="utf8") as f):  # взяли загруженные вакансии для дальнейшей работы
+#     list_vacancies = json.load(f)
+#
 # J = JSONSaver()
-# J.add_vacancy(list)
-
-
-
+# J.add_vacancy(list_vacancies)
+# J.delete_vacancy()
