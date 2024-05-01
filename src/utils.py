@@ -6,8 +6,9 @@ import os.path
 
 
 def get_vacancies(vacancy, city):
-    """ блок обработки данных для формирования ответа на запрос"""
-
+    """
+    блок обработки данных для формирования ответа на запрос
+    """
     hh_api = HeadHunterAPI()
     data = hh_api.load_vacancies(vacancy)
     list_classes = Vacancy.get_list_vacancies(data, city)
@@ -19,48 +20,11 @@ def sort_vacancies(list_classes):
     Функция сортирует список объектов по зарплате
     от большего к меньшему
     """
-    # try:
-    sorted_list = sorted(list_classes, reverse=True)
-    return sorted_list
-    # except TypeError:
-    #     pass
-
-
-def get_top_vacancies(list_classes: list[object, ...] | object | None, top_n: str) -> list[object, ...] | object:
-    """
-    Функция возвращает количество элементов, которое укажет пользователь в параметре (top_n)
-    если параметр (top_n) не указан, функция вернет изначальный список (list_classes)
-    """
     try:
-        if top_n:
-            if int(top_n) == 0:
-                raise IndexError(f"\n\nВы передали некорректное значение - {top_n}\n"
-                                 f"Ошибка: невозможно вернуть {top_n} вакансий")
-
-            else:
-                try:
-                    if int(top_n) > len(list_classes):
-                        if len(list_classes) != 11 and len(list_classes) % 10 == 1:
-                            raise IndexError(f"\n\nПо указанным параметрам мы нашли только {len(list_classes)} "
-                                             f"вакансию")
-                        elif 2 <= len(list_classes) <= 4:
-                            raise IndexError(f"\n\nПо указанным параметрам мы нашли только {len(list_classes)} "
-                                             f"вакансии")
-                        else:
-                            raise IndexError(f"\n\nПо указанным параметрам мы нашли только {len(list_classes)} "
-
-                                             f"вакансий")
-                except IndexError as a:
-                    print(a)
-
-                finally:
-                    return list_classes[:int(top_n)]
-        else:
-            return list_classes
+        sorted_list = sorted(list_classes, reverse=True)
+        return sorted_list
     except TypeError:
         pass
-    except IndexError as a:
-        print(a)
 
 
 def get_vacancies_by_salary(list_classes: list[object, ...], vacancy, salary_from, city):
@@ -106,15 +70,8 @@ def get_vacancies_by_salary(list_classes: list[object, ...], vacancy, salary_fro
 
 def get_top_vacancies(list_classes: list[object, ...] | object | None, top_n: str) -> list[object, ...] | object:
     """
-    Функция возвращает только то количество элементов которое укажет пользователь в параметре (top_n)
-    если параметр (top_n) не указан
-    функция вернет изначальный список (list_classes)
-
-    если переданный параметр (top_n) больше
-    чем количество элементов в списке
-    пользователю вернется список всех элементов
-    и сообщение о том что в списке нет указанного количества элементов
-
+    Функция возвращает количество элементов, которое укажет пользователь в параметре (top_n)
+    если параметр (top_n) не указан, функция вернет изначальный список (list_classes)
     """
     try:
         if top_n:
@@ -140,10 +97,8 @@ def get_top_vacancies(list_classes: list[object, ...] | object | None, top_n: st
 
                 finally:
                     return list_classes[:int(top_n)]
-
         else:
             return list_classes
-
     except TypeError:
         pass
     except IndexError as a:
@@ -179,5 +134,15 @@ def get_start():
         print("Ты не ввел параметры по зарплате.\nЯ покажу тебе самые высокооплачиваемые вакансии:")
     else:
         print(f'Подождите...\n')
-    return city, vacancy, top_n, salary_from
+    list_classes = get_vacancies(vacancy, city)
+    sorted_vacancies = sort_vacancies(list_classes)
+    ranged_vacancies = get_vacancies_by_salary(sorted_vacancies, vacancy, salary_from, city)
+
+    path = os.path.join(os.getcwd(), 'data', 'vacancy.json')
+    JSONSaver(path).write_vacancies(ranged_vacancies)
+
+    top_vacancies = get_top_vacancies(ranged_vacancies, top_n)
+    print_vacancies(top_vacancies)
+    return
+
 

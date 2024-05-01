@@ -17,8 +17,10 @@ class Vacancy:
 
         """объекты на уровне класса"""
 
-
     def class_to_dict(obj):
+        """
+        :return: возвращает объекты класса в качестве словаря
+        """
         return obj.__dict__
 
     @staticmethod
@@ -107,44 +109,47 @@ class Vacancy:
 
     def __str__(self):
         ''' строковое отображение'''
-        return f'Вакансия: {self.name}\nГород: {self.area}\nКомпания-pаботодатель: {self.employer}\nТребования: {self.snippet}\nЗарплата к начислению:\nот: {self.salary_from}\nдо: {self.salary_to}\nВалюта: {self.salary_currency}\nСсылка на вакансию:{self.alternate_url}\n\n'
+        if self.salary_from == 0:
+            salary_from = "Информация не указана"
+        else:
+            salary_from = self.salary_from
+        if self.salary_to == 0:
+            salary_to = "Информация не указана"
+        else:
+            salary_to = self.salary_from
+        return (f'Вакансия: {self.name}\n'
+                f'Город: {self.area}\n'
+                f'Компания-pаботодатель: {self.employer}\n'
+                f'Требования: {self.snippet}\n'
+                f'Зарплата:\nот: {salary_from}\nдо: {salary_to}\n'
+                f'Валюта: {self.salary_currency}\n'
+                f'Ссылка на вакансию:{self.alternate_url}\n'
+                f'Статус вакансии:{self.type_v}\n')
 
     def __repr__(self):
-        return f'Вакансия: {self.name}\nГород: {self.area}\nКомпания-pаботодатель: {self.employer}\nТребования: {self.snippet}\nЗарплата:\nот: {self.salary_from}\nдо: {self.salary_to}\nВалюта: {self.salary_currency}\nСсылка на вакансию:{self.alternate_url}\n\n'
+        return (f'Вакансия: {self.name}\n'
+                f'Город: {self.area}\n'
+                f'Компания-pаботодатель: {self.employer}\n'
+                f'Требования: {self.snippet}\n'
+                f'Зарплата:\nот: {self.salary_from}\nдо: {self.salary_to}\n'
+                f'Валюта: {self.salary_currency}\n'
+                f'Ссылка на вакансию:{self.alternate_url}\n'
+                f'Статус вакансии:{self.type_v}\n')
 
     def __lt__(self, other):
-        """Метод сравнения вакансий между собой по зарплате и валидации данных по зарплате"""
-
-        if self.salary_from is not None and other.salary_from is not None:
-            if self.salary_from < other.salary_from:
-                return self
-            else:
-                return other
-        if self.salary_to is not None and other.salary_to is not None:
-            if self.salary_to < other.salary_to:
-                return self
-            else:
-                return other
-        return 'Зарплата не указана'
+        """
+        Метод сравнения вакансий между собой по зарплате - какой из объектов больше
+        """
+        return self.salary_from < other.salary_from
 
     def __gt__(self, other):
+        """
+        Метод сравнения вакансий между собой по зарплате - какой из объектов меньше
+        """
+        return self.salary_from < other.salary_from
 
-        """Метод сравнения вакансий между собой по зарплате и валидации данных по зарплате"""
-
-        if self.salary_from is not None and other.salary_from is not None:
-            if self.salary_from > other.salary_from:
-                return self
-            else:
-                return other
-        if self.salary_to is not None and other.salary_to is not None:
-            if self.salary_to > other.salary_to:
-                return self
-            else:
-                return other
-        return 'Зарплата не указана'
-
-    def get_salary_from(self):
-        return self.salary_from
-
-    def get_salary_to(self):
-        return self.salary_to
+    def __eq__(self, other):
+        """
+        Метод сравнения вакансий между собой по зарплате - равны ли два объекта
+        """
+        return self.salary_from == other.salary_from

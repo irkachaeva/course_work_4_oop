@@ -17,8 +17,12 @@ class HeadHunterAPI(ApiABS):
             self.params = {'text': '', 'page': 0, 'per_page': 100}
             self.vacancies = []
 
-
     def load_vacancies(self, keyword):
+        """
+        Загрузка данных через API c сайта HH
+        :param keyword: ключевое слово в названии вакансии
+        :return: список вакансий с сайта
+        """
         self.params['text'] = keyword
         while self.params['page'] != 20:
             response = requests.get(self.url, headers=self.headers, params=self.params)
@@ -29,8 +33,3 @@ class HeadHunterAPI(ApiABS):
 
         return self.vacancies
 
-
-# api = HeadHunterAPI()
-# keyword = ("Оператор склада")
-# vacancies = api.load_vacancies(keyword)
-# print(vacancies)
