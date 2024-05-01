@@ -12,10 +12,11 @@ class ApiABS(ABC):
 class HeadHunterAPI(ApiABS):
 
     def __init__(self):
-        self.url = 'https://api.hh.ru/vacancies'
-        self.headers = {'User-Agent': 'HH-User-Agent'}
-        self.params = {'text': '', 'page': 0, 'per_page': 100}
-        self.vacancies = []
+            self.url = 'https://api.hh.ru/vacancies'
+            self.headers = {'User-Agent': 'HH-User-Agent'}
+            self.params = {'text': '', 'page': 0, 'per_page': 100}
+            self.vacancies = []
+
 
     def load_vacancies(self, keyword):
         self.params['text'] = keyword

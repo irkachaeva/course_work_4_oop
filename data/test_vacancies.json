@@ -1,0 +1,88 @@
+[
+    {
+        "id": "97825632",
+        "premium": false,
+        "name": "Курьер",
+        "department": "Не заполнено",
+        "has_test": false,
+        "response_letter_required": false,
+        "area": {
+            "id": "1",
+            "name": "Москва",
+            "url": "https://api.hh.ru/areas/1"
+        },
+        "salary": {
+            "from": 42000,
+            "to": 51000,
+            "currency": "RUR",
+            "gross": false
+        },
+        "type": {
+            "id": "open",
+            "name": "Открытая"
+        },
+        "address": {
+            "city": "Москва",
+            "street": "Малый Казённый переулок",
+            "building": "3",
+            "lat": 55.760287,
+            "lng": 37.65267,
+            "description": null,
+            "raw": "Москва, Малый Казённый переулок, 3",
+            "metro": null,
+            "metro_stations": [],
+            "id": "3330192"
+        },
+        "response_url": "Не заполнено",
+        "sort_point_distance": "Не заполнено",
+        "published_at": "2024-04-24T15:36:09+0300",
+        "created_at": "2024-04-24T15:36:09+0300",
+        "archived": false,
+        "apply_alternate_url": "https://hh.ru/applicant/vacancy_response?vacancyId=97825632",
+        "insider_interview": "Не заполнено",
+        "url": "https://api.hh.ru/vacancies/97825632?host=hh.ru",
+        "alternate_url": "https://hh.ru/vacancy/97825632",
+        "relations": [],
+        "employer": {
+            "id": "52100",
+            "name": "ФГУП РСУ Управления делами Президента Российской Федерации",
+            "url": "https://api.hh.ru/employers/52100",
+            "alternate_url": "https://hh.ru/employer/52100",
+            "logo_urls": null,
+            "vacancies_url": "https://api.hh.ru/vacancies?employer_id=52100",
+            "accredited_it_employer": false,
+            "trusted": true
+        },
+        "snippet": {
+            "requirement": "умение использовать технические средства (карты, навигатор) для прокладывания оптимального маршрута. - знание правил учета, хранения и доставки деловых бумаг, пакетов, писем...",
+            "responsibility": "своевременно, гарантированно и надежно доставлять по назначению и в офис бумажную корреспонденцию (письма, пакеты и т.п.), собирать подтверждения о..."
+        },
+        "contacts": "Не заполнено",
+        "schedule": {
+            "id": "fullDay",
+            "name": "Полный день"
+        },
+        "working_days": [],
+        "working_time_intervals": [],
+        "working_time_modes": [],
+        "accept_temporary": false,
+        "professional_roles": [
+            {
+                "id": "58",
+                "name": "Курьер"
+            }
+        ],
+        "accept_incomplete_resumes": false,
+        "experience": {
+            "id": "between3And6",
+            "name": "От 3 до 6 лет"
+        },
+        "employment": {
+            "id": "full",
+            "name": "Полная занятость"
+        },
+        "adv_response_url": "Не заполнено",
+        "is_adv_vacancy": false,
+        "adv_context": "Не заполнено"
+    }
+  ]
