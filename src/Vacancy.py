@@ -51,11 +51,11 @@ class Vacancy:
 
                 else:
                     if isinstance(item['salary'], dict):
-                        if Vacancy.check_data_int(item['salary'].get('from')) > 0:
+                        if item['salary'].get('gross') is False:
                             salary_from = int(Vacancy.check_data_int(item['salary'].get('from')) / Vacancy.tax)
                         else:
                             salary_from = Vacancy.check_data_int(item['salary'].get('from'))
-                        if item['salary']['to'] is not None:
+                        if item['salary'].get('gross') is False:
                             salary_to = int(Vacancy.check_data_int(item['salary'].get('to')) / Vacancy.tax)
                         else:
                             salary_to = Vacancy.check_data_int(item['salary'].get('to'))
@@ -73,6 +73,7 @@ class Vacancy:
                               area, employer, experience,
                               snippet, alternate_url, type_v)
                 Vacancy.vacancies_for_use.append(vacancy)
+
             elif city == "":
                 name = Vacancy.check_data_text(item['name'])
                 if item['salary'] is None:
@@ -82,14 +83,14 @@ class Vacancy:
 
                 else:
                     if isinstance(item['salary'], dict):
-                        if Vacancy.check_data_int(item['salary'].get('from')) > 0:
-                            salary_from = int(Vacancy.check_data_text(item['salary'].get('from')) / Vacancy.tax)
+                        if item['salary'].get('gross') is False:
+                            salary_from = int(Vacancy.check_data_int(item['salary'].get('from')) / Vacancy.tax)
                         else:
-                            salary_from = Vacancy.check_data_text(item['salary'].get('from'))
-                        if item['salary']['to'] is not None:
-                            salary_to = int(Vacancy.check_data_text(item['salary'].get('to')) / Vacancy.tax)
+                            salary_from = Vacancy.check_data_int(item['salary'].get('from'))
+                        if item['salary'].get('gross') is False:
+                            salary_to = int(Vacancy.check_data_int(item['salary'].get('to')) / Vacancy.tax)
                         else:
-                            salary_to = Vacancy.check_data_text(item['salary'].get('to'))
+                            salary_to = Vacancy.check_data_int(item['salary'].get('to'))
                         salary_currency = item['salary'].get('currency')
 
                 salary_gross = "ЗП к начислению"
